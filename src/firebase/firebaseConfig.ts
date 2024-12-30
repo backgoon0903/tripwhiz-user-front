@@ -1,42 +1,50 @@
-// Import the functions you need from the SDKs
-import { initializeApp, FirebaseApp } from "firebase/app";
-import { getMessaging, Messaging } from "firebase/messaging";
-import { getDatabase, Database } from "firebase/database"; // Realtime Database 추가
+import { initializeApp } from "firebase/app";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-// Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCJXyfRRftFsYPOUMm4fYXsoFh-UKWmlO8",
-    authDomain: "tripwhiz-c6891.firebaseapp.com",
-    projectId: "tripwhiz-c6891",
-    storageBucket: "tripwhiz-c6891.firebasestorage.app",
-    messagingSenderId: "433365700615",
-    appId: "1:433365700615:web:7c8bce5d4705db4acadaa2",
-    measurementId: "G-XRBE89YGZ9",
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-const secondfirebaseConfig = {
-    apiKey: "AIzaSyDSapVBODWN8Xt0hDuTKrP1KJfgE--aU5A",
-    authDomain: "luggagelacation.firebaseapp.com",
-    projectId: "luggagelacation",
-    storageBucket: "luggagelacation.firebasestorage.app",
-    messagingSenderId: "355881961377",
-    appId: "1:355881961377:web:1d55e0aadff6509b9b6de0",
-    measurementId: "G-K2R2D48SH8",
+const app = initializeApp(firebaseConfig);
+export const messaging = getMessaging(app);
+
+// Service Worker 등록
+export const registerServiceWorker = async () => {
+    if ('serviceWorker' in navigator) {
+        try {
+            const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+            console.log('Service Worker 등록 성공:', registration);
+        } catch (error) {
+            console.error('Service Worker 등록 실패:', error);
+        }
+    }
 };
 
-// Initialize Firebase apps
-const app: FirebaseApp = initializeApp(firebaseConfig);
-const secondaryApp: FirebaseApp = initializeApp(secondfirebaseConfig, "secondaryApp");
+// FCM 토큰 요청
+export const requestFCMToken = async (): Promise<string | null> => {
+    try {
+        const token = await getToken(messaging, {
+            vapidKey: import.meta.env.VITE_FIREBASE_VAPID_KEY,
+        });
+        console.log("FCM 토큰:", token);
+        return token;
+    } catch (error) {
+        console.error("FCM 토큰 요청 실패:", error);
+        return null;
+    }
+};
 
-// Messaging services
-export const messaging: Messaging = getMessaging(app);
-// Realtime Database for secondary app
-export const secondaryDatabase: Database = getDatabase(secondaryApp);
-
-// // Analytics (Browser-Only Initialization)
-// let analytics: Analytics | null = null;
-// if (typeof window !== "undefined") {
-//     analytics = getAnalytics(app); // Initialize only in browser
-// }
-
-export { app, secondaryApp};
+// 알림 수신
+export const onMessageListener = () =>
+    new Promise((resolve) => {
+        onMessage(messaging, (payload) => {
+            console.log("알림 수신:", payload);
+            resolve(payload);
+        });
+    });

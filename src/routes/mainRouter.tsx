@@ -5,16 +5,18 @@ import memberRouter from "./memberRouter";
 import productRouter from "./productRouter";
 import cartRouter from "./cartRouter";
 import paymentRouter from "./paymentRouter";
-import GoogleMapsPage from "../pages/map/GoogleMapsPage";
-import ThemePage from "../pages/theme/ThemePage";
+// import GoogleMapsPage from "../pages/map/GoogleMapsPage";
 import sidebarRouter from "./sidebarRouter.tsx";
+import OrderRouter from "./orderRouter.tsx";
+import luggageRouter from "./luggageRouter.tsx";
 
 
 const LoadingPage = lazy(() => import("../pages/LoadingPage"));
 const PickupPage = lazy(() => import("../pages/pickup/PickupPage"));
-const MapPage = lazy(() => import("../components/luggage/luggage.tsx"));
 const DestinationPage = lazy(() => import("../pages/destination/DestinationPage"));
 const MainPage = lazy(() => import("../pages/MainPage"));
+const ThemePage = lazy(() => import("../pages/theme/ThemePage"));
+// const HealthCheck = lazy(() => import("../pages/health/HealthCheckPage.tsx"));
 
 const Loading = <LoadingPage/>;
 
@@ -33,30 +35,26 @@ const mainRouter = createBrowserRouter([
                 element: <Suspense fallback={Loading}><MainPage/></Suspense>
             },
             {
-                path: "/luggage",
-                element: <Suspense fallback={Loading}><MapPage/></Suspense>
+                path: "/main",
+                element: <Suspense fallback={Loading}><MainPage/></Suspense>
             },
             {
                 path: "/pickup",
                 element: <Suspense fallback={Loading}><PickupPage/></Suspense>
             },
-            {
-                path: "/maps",
-                element: <Suspense fallback={Loading}><GoogleMapsPage/></Suspense>
-            },
-
-            {
-                path: "/destination",
-                element: <Suspense fallback={Loading}><DestinationPage/></Suspense>
-            },
+            // {
+            //     path: "/maps",
+            //     element: <Suspense fallback={Loading}><GoogleMapsPage/></Suspense>
+            // },
             productRouter,
             memberRouter,
             cartRouter,
             paymentRouter,
-            sidebarRouter
+            sidebarRouter,
+            OrderRouter,
+            luggageRouter
         ],
     },
-
     {
         path: "/",
         element: <Suspense fallback={Loading}><DestinationPage/></Suspense>

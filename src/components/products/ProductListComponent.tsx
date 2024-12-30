@@ -4,8 +4,9 @@ import { getList } from "../../api/productAPI";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { cartStore } from "../../store/CartStore.ts";
+// import { cartStore } from "../../store/CartStore.ts";
 import CategoryFilterComponent from "./CategoryFilterComponent.tsx";
+import {addCart} from "../../api/cartAPI.ts";
 
 const initialState: IProduct[] = [
     {
@@ -17,7 +18,7 @@ const initialState: IProduct[] = [
         scno: 0,
         tno: 0,
         delflag: false,
-        uploadFileNames: [],
+        attachFiles: [],
     },
 ];
 
@@ -32,7 +33,10 @@ const ProductListComponent = () => {
 
     const [searchParams] = useSearchParams();
 
-    // const email = useAuthStore((state) => state.email);
+    // const IMAGE_BASE_URL = "/api/admin/product/image"; // 이미지 파일의 기본 경로 설정
+    const IMAGE_BASE_URL = import.meta.env.VITE_BUCKET_URL; // 이미지 파일의 기본 경로 설정
+
+    console.log(IMAGE_BASE_URL)
 
     // 쿼리스트링에서 값 가져오기 및 숫자로 변환_SY
     const tno = searchParams.get("tno") ? parseInt(searchParams.get("tno") as string, 10) : null;
@@ -42,9 +46,9 @@ const ProductListComponent = () => {
     // 장바구니 슬라이드 패널 상태
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
-    const [quantity, setQuantity] = useState(1);
+    const [qty, setQty] = useState(1);
 
-    const addToCart = cartStore((state) => state.addToCart);
+    // const addToCart = cartStore((state) => state.addToCart);
 
     const moveToDetails = (pno: number) => {
         navigate(`/product/read/${pno}`);
@@ -90,7 +94,7 @@ const ProductListComponent = () => {
     // 슬라이드 패널 열기 함수
     const openPanel = (product: IProduct) => {
         setSelectedProduct(product);
-        setQuantity(1);
+        setQty(1);
         setIsPanelOpen(true);
     };
 
@@ -101,17 +105,26 @@ const ProductListComponent = () => {
     };
 
     // 수량 조절 함수
-    const increaseQuantity = () => setQuantity((prev) => prev + 1);
-    const decreaseQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
+    const increaseQty = () => setQty((prev) => prev + 1);
+    const decreaseQty = () => setQty((prev) => Math.max(1, prev - 1));
 
     // 장바구니에 선택한 수량만큼 상품 추가
-    const handleAddToCart = () => {
-        if (selectedProduct) {
-            for (let i = 0; i < quantity; i++) {
-                // @ts-ignore
-                addToCart(selectedProduct, 1);
-            }
-            closePanel();
+    const handleAddToCart = async () => {
+        if (!selectedProduct) {
+            console.warn("선택된 상품이 없습니다.");
+            return;
+        }
+
+        try {
+            // 선택된 상품의 번호와 수량으로 API 호출
+            await addCart(selectedProduct.pno, selectedProduct.pname,selectedProduct.price, qty);
+
+            console.log("장바구니에 상품이 추가되었습니다!");
+            closePanel(); // 선택 패널 닫기 (선택 사항)
+        } catch (error) {
+            console.error("장바구니에 상품 추가 실패:", error);
+            // 사용자에게 알림 또는 에러 처리
+            alert("장바구니에 상품 추가에 실패했습니다. 다시 시도해주세요.");
         }
     };
 
@@ -128,26 +141,46 @@ const ProductListComponent = () => {
                 />
                 <div className="grid grid-cols-2 gap-4">
                     {products.length > 0 ? (
-                        products.map((product, index) => (
-                            <div
-                                key={`${product.pno}-${index}`}
-                                className="relative border p-6 rounded-lg shadow-md"
-                                onClick={() => moveToDetails(product.pno)}
-                                ref={index === products.length - 1 ? lastProductRef : null}
-                            >
-                                <h3 className="text-lg font-semibold">{product.pname}</h3>
-                                <p className="text-gray-700">{product.pdesc}</p>
-                                <p className="text-gray-700">가격: {product.price}원</p>
-                                <FontAwesomeIcon
-                                    icon={faCartShopping}
-                                    className="text-gray-700 text-xl absolute bottom-2 right-2 cursor-pointer"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        openPanel(product);
-                                    }}
-                                />
-                            </div>
-                        ))
+                        products.map((product, index) => {
+                            if (product.price === 0) return null; // 0원 상품은 렌더링하지 않음
+                            return (
+                                <div
+                                    key={`${product.pno}-${index}`}
+                                    className="relative border p-6 rounded-lg shadow-md"
+                                    onClick={() => moveToDetails(product.pno)}
+                                    ref={index === products.length - 1 ? lastProductRef : null}
+                                >
+                                    {/* 이미지 표시 */}
+                                    {product.attachFiles.length > 0 && (
+                                        <img
+                                            src={`${IMAGE_BASE_URL}/${product.attachFiles[0].file_name}`}
+                                            alt={product.pname}
+                                            className="mb-2 w-full h-40 object-cover rounded"
+                                        />
+                                    )}
+                                    {/* 상품명 */}
+                                    <h3 className="text-sm text-gray-800 mb-10 text-left">
+                                        {product.pname}
+                                    </h3>
+                                    {/* 가격과 장바구니 아이콘 (하단 정렬) */}
+                                    <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
+                                        {/* 가격 */}
+                                        <p className="text-lg font-bold text-gray-700 text-left">
+                                            {new Intl.NumberFormat("ko-KR").format(product.price)}
+                                        </p>
+                                        {/* 장바구니 아이콘 */}
+                                        <FontAwesomeIcon
+                                            icon={faCartShopping}
+                                            className="text-gray-700 text-lg cursor-pointer"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                openPanel(product);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })
                     ) : (
                         <p>상품이 없습니다.</p>
                     )}
@@ -169,14 +202,14 @@ const ProductListComponent = () => {
                 {selectedProduct && (
                     <>
                         <p className="text-gray-700 mb-4">
-                            총 가격: <span className="font-bold">{selectedProduct.price * quantity}원</span>
+                            총 가격: <span className="font-bold">{selectedProduct.price * qty}원</span>
                         </p>
                         <div className="flex justify-end items-center mb-4">
-                            <button onClick={decreaseQuantity} className="p-2 border rounded-l">
+                            <button onClick={decreaseQty} className="p-2 border rounded-l">
                                 -
                             </button>
-                            <span className="px-4 border-t border-b">{quantity}</span>
-                            <button onClick={increaseQuantity} className="p-2 border rounded-r">
+                            <span className="px-4 border-t border-b">{qty}</span>
+                            <button onClick={increaseQty} className="p-2 border rounded-r">
                                 +
                             </button>
                         </div>

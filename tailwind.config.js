@@ -17,10 +17,11 @@ export default {
           secondary: '#627d98', // 중간 밝기의 글씨 색
         },
       },
+      fontFamily: {
+        'faculty-glyphic': ['"Faculty Glyphic"', 'sans-serif'],
+        'nanum-gothic': ['"Nanum Gothic"', 'sans-serif'],
+      },
     },
-  },
-  plugins: [
-    require("tailwind-scrollbar-hide"), // 스크롤바 숨기기 플러그인 추가
-  ],
+  }
 }
 

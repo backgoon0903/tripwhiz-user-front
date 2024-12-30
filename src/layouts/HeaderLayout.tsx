@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import {startTransition, useState} from 'react';
 import Sidebar from '../layouts/SidebarLayout';
 import { useNavigate } from "react-router-dom";
 
@@ -14,8 +12,8 @@ function HeaderLayout() {
     };
 
     const moveToHome = () => {
-        navigate({
-            pathname: `/`
+        startTransition(() => {
+            navigate("/main"); // 메인 페이지로 이동
         });
     };
 
@@ -32,21 +30,28 @@ function HeaderLayout() {
                 <div className="cursor-pointer" onClick={moveToHome}>
                     {/* 로고 이미지 삽입 */}
                     <img
-                        src="/public/images/tripwhiz logo.png" // 로고 이미지 경로 설정
+                        src="/images/tripwhiz_logo.png" // 로고 이미지 경로 설정
                         alt="emart24 logo"
-                        className="h-8" // Tailwind로 이미지 높이 설정
+                        className="h-16" // Tailwind로 이미지 높이 설정
                     />
                 </div>
+
                 <div className="flex items-center">
-                    <FontAwesomeIcon
-                        icon={faCartShopping}
+                    {/* 검색 이미지 */}
+                    <img
+                        src="/images/header/free-icon-search-interface-symbol-54481.png" // 검색 아이콘 이미지 경로
+                        alt="Notification Icon"
+                        className="h-5 w-5 cursor-pointer mr-4"
+                    />
+
+                    {/* 장바구니 이미지 */}
+                    <img
+                        src="/images/header/shopping-cart.png" // 장바구니 아이콘 이미지 경로
+                        alt="Cart Icon"
                         onClick={moveToCart}
-                        className="text-gray-700 mr-4 text-xl cursor-pointer"
+                        className="h-5 w-5 cursor-pointer mr-4 mt-0.5"
                     />
-                    <FontAwesomeIcon
-                        icon={faBell}
-                        className="text-gray-700 mr-4 text-xl cursor-pointer"
-                    />
+
                     <div
                         className="text-yellow-500 text-3xl cursor-pointer"
                         onClick={toggleSidebar}

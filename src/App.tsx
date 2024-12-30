@@ -1,19 +1,43 @@
-import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import QRCodeComponent from './components/qrcode/QRCodeComponent';
-import BaseLayout from './layouts/BaseLayout';
-
+import { getToken, onMessage } from "firebase/messaging";
+import { useEffect } from "react";
+import { messaging } from "./firebase/firebaseConfig";
+import { RouterProvider } from "react-router-dom";
+import mainRouter from "./routes/mainRouter";
 
 function App() {
+    async function requestPermission() {
+        // Requesting permission using Notification API
+        const permission = await Notification.requestPermission();
+
+        if (permission === "granted") {
+            alert("Notification granted!");
+            const token = await getToken(messaging, {
+                vapidKey: 'BPBzQraHoZvc1D9vyZtyRSXLBRcWf3bhXCL3qgeMHcIfop5nQWFIkmpdPa0c2BzOW5JTXLICfd2SGxH1Or74Gxo',
+            });
+
+            // We can send the token to the server
+            console.log("Token generated: ", token);
+
+        } else if (permission === "denied") {
+            // Notifications are blocked
+            alert("You denied for the notification");
+        }
+    }
+
+    useEffect(() => {
+        requestPermission();
+
+        // Message listener
+        onMessage(messaging, (payload) => {
+            console.log(payload);
+            alert("On Message");
+        });
+    }, []);
+
     return (
-        <Router>
-            <BaseLayout>
-                <Routes>
-                    {/* QR 코드 페이지 */}
-                    <Route path="/order/complete/:ono/:totalAmount" element={<QRCodeComponent />} />
-                </Routes>
-            </BaseLayout>
-        </Router>
+        <>
+            <RouterProvider router={mainRouter} />
+        </>
     );
 }
 

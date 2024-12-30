@@ -16,7 +16,8 @@ function LoginComponent() {
             await getGoogleWithAccessToken(tokenResponse.access_token, setUser);
 
             // 로그인 후 리다이렉션 처리
-            window.location.href = "http://localhost:5173/product/list";
+            window.location.href = "https://tripwhiz.shop/product/list";
+            // window.location.href = "http://localhost:8081/product/list";
         },
         onError: () => console.error("Failed Login.."),
         scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
@@ -26,7 +27,7 @@ function LoginComponent() {
     const kakaoLoginLink = getKakaoLoginLink();
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+        <div className="flex flex-col items-center justify-start min-h-screen bg-white pt-64">
             {/* Title */}
             <h2 className="text-center text-2xl font-bold text-[#1D2D5F] mb-8">Sign In</h2>
 
