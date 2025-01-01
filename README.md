@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+<div align="center">
+    <img src="./ewhiz.png" width="300px" alt="Ewhiz Logo">
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# TRIPWHIZ
+> 국내에서 원하는 상품을 구매 및 결제한 뒤, 해외 현지 편의점에서 간편하게 픽업할 수 있는 서비스   
+> 개발기간: 2024.10.15 ~ 2024.12.24
 
-Currently, two official plugins are available:
+# 배포주소
+> https://tripwhiz.shop
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Installation
+Steps to set up the project locally.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Usage
+Instructions on running the project.
 
-- Configure the top-level `parserOptions` property like this:
+## Features- Feature 1
+- Feature 2
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Contributing
+How to contribute to the project.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## License
+This project is licensed under the MIT License.
