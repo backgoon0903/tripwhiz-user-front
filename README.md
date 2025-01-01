@@ -21,15 +21,3 @@ For building and running the application you need:
 ```bash
 $ git clone https://github.com/eggzuxi/tripwhiz-user-front.git
 $ cd tripwhiz-user-front
-
-## Usage
-Instructions on running the project.
-
-## Features- Feature 1
-- Feature 2
-
-## Contributing
-How to contribute to the project.
-
-## License
-This project is licensed under the MIT License.
