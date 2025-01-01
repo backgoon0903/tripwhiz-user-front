@@ -1,3 +1,7 @@
+<div align="center">
+    <img src="./ewhiz.png" width="300px" alt="Ewhiz Logo">
+</div>
+
 # TRIPWHIZ
 
 ## Description
