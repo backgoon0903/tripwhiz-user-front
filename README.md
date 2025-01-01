@@ -21,3 +21,10 @@ For building and running the application you need:
 ```bash
 $ git clone https://github.com/eggzuxi/tripwhiz-user-front.git
 $ cd tripwhiz-user-front
+
+## Frontend
+```bash
+$ cd tripwhiz-user-front
+$ npm install
+$ npm run dev
+
