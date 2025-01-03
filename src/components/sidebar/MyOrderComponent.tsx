@@ -30,11 +30,11 @@ function MyOrderComponent() {
 
     return (
         <div className="p-6 bg-gray-50 min-h-screen">
-            <h1 className="text-2xl font-bold mb-4 text-gray-800">My Orders</h1>
+            <h1 className="text-2xl font-bold mb-4 text-gray-800">주문내역</h1>
             {loading ? (
                 <div className="text-center text-gray-600">Loading...</div>
             ) : orders.length === 0 ? (
-                <div className="text-center text-gray-600">No orders found.</div>
+                <div className="text-center text-gray-600">주문이 없습니다</div>
             ) : (
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {orders.map((order) => (
@@ -43,37 +43,37 @@ function MyOrderComponent() {
                             className="p-4 border rounded-lg shadow-sm bg-white"
                         >
                             <h2 className="text-lg font-semibold text-gray-800">
-                                Order #{order.ono}
+                                주문번호 #{order.ono}
                             </h2>
                             <p className="text-sm text-gray-600">
-                                Status:{" "}
+                                주문상태:{" "}
                                 <span className={`font-medium ${getStatusColor(order.status)}`}>
                                     {order.status}
                                 </span>
                             </p>
                             <p className="text-sm text-gray-600">
-                                Pickup Date: {order.pickUpDate}
+                                픽업일자: {order.pickUpDate}
                             </p>
                             <p className="text-sm text-gray-600">
-                                Total Amount: {order.totalAmount}
+                                총 수량: {order.totalAmount}
                             </p>
                             <p className="text-sm text-gray-600">
-                                Total Price: ${order.totalPrice.toFixed(2)}
+                                총 가격: ${order.totalPrice.toFixed(2)}
                             </p>
                             <p className="text-sm text-gray-600">
-                                Ordered At: {new Date(order.createTime).toLocaleString()}
+                                주문일자: {new Date(order.createTime).toLocaleString()}
                             </p>
                             <button
-                                className="mt-4 w-full bg-yellow-500 hover:bg-red-600 text-white text-sm py-2 rounded-lg"
+                                className="mt-4 w-full bg-[#1d2d5f] hover:bg-[#162348] text-white text-sm py-2 rounded-lg"
                                 onClick={() => navigate("/details")}
                             >
-                                Order Details
+                                주문상세
                             </button>
                             <button
-                                className="mt-4 w-full bg-red-500 hover:bg-red-600 text-white text-sm py-2 rounded-lg"
+                                className="mt-4 w-full bg-[#808080] hover:bg-[#696969] text-white text-sm py-2 rounded-lg"
                                 onClick={() => handleCancelOrder(order.ono)}
                             >
-                                Cancel Order
+                                주문취소
                             </button>
                         </div>
                     ))}
@@ -85,7 +85,7 @@ function MyOrderComponent() {
                     onClick={() => setPage((prev) => Math.max(prev - 1, 0))}
                     disabled={page === 0}
                 >
-                    Previous
+                    이전
                 </button>
                 <span className="mx-2 text-sm text-gray-600">
                     Page {page + 1} of {Math.ceil(totalElements / size)}
@@ -95,7 +95,7 @@ function MyOrderComponent() {
                     onClick={() => setPage((prev) => prev + 1)}
                     disabled={orders.length < size}
                 >
-                    Next
+                    다음
                 </button>
             </div>
         </div>
