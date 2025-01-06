@@ -29,12 +29,3 @@
     <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white/>
     <br />
 </div>
-
-# 🛠️Team
-| Name | GitHub |
-|------|--------|
-| 박주희 | [GitHub Profile](https://github.com/eggzuxi) |
-| 차민주 | [GitHub Profile](https://github.com/backgoon0903) |
-| 박신영 | [GitHub Profile](https://github.com/ssinyong) |
-| 진성오 | [GitHub Profile](https://github.com/jin-sung-oh) |
-| 최설아 | [GitHub Profile](https://github.com/Seola-CHOE) |
