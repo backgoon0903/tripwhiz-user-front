@@ -9,6 +9,13 @@
 
 ---
 
+## 📌주요 기능
+- 국내 결제 후 해외 픽업
+- 수화물 이동, 보관 서비스
+- 챗봇
+
+---
+
 ## 🚀Skills
 
 <div align="center">
@@ -46,10 +53,11 @@
 ---
 
 ## 🛠Team
-| Name | GitHub |
-|------|--------|
-| 박주희 | [GitHub Profile](https://github.com/eggzuxi) |
-| 차민주 | [GitHub Profile](https://github.com/backgoon0903) |
-| 박신영 | [GitHub Profile](https://github.com/ssinyong) |
-| 진성오 | [GitHub Profile](https://github.com/jin-sung-oh) |
-| 최설아 | [GitHub Profile](https://github.com/Seola-CHOE) |
+
+| Image        | Name   | Role        | GitHub                                   |
+|--------------|--------|-------------|------------------------------------------|
+| ![박주희](./images/juhui.jpg) | 박주희    | Team Leader | [GitHub Profile](https://github.com/eggzuxi)       |
+| ![차민주](./images/minju.png) | 차민주    | Full Stack  | [GitHub Profile](https://github.com/backgoon0903) |
+| ![박신영](./images/sinyong.jpg) | 박신영    | Full Stack  | [GitHub Profile](https://github.com/ssinyong)     |
+| ![진성오](./images/sungoh.jpg) | 진성오    | Full Stack  | [GitHub Profile](https://github.com/jin-sung-oh)  |
+| ![최설아](./images/seola.jpg) | 최설아    | Full Stack  | [GitHub Profile](https://github.com/Seola-CHOE)   |
