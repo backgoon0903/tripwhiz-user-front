@@ -30,25 +30,11 @@
     <br />
 </div>
 
----
-
-# Team
-<table>
-  <tbody>
-    <tr>
-      <td align="center"><a href="https://github.com/eggzuxi"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 박주희 </b></sub></a><br /></td>
-    </tr>
-    <tr>
-    <td align="center"><a href="https://github.com/backgoon0903"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 차민주 </b></sub></a><br /></td>
-    </tr>
-    <tr>
-    <td align="center"><a href="https://github.com/ssinyong"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 박신영 </b></sub></a><br /></td>
-    </tr>
-    <tr>
-    <td align="center"><a href="https://github.com/jin-sung-oh"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 진성오 </b></sub></a><br /></td>
-    </tr>
-    <tr>
-    <td align="center"><a href="https://github.com/Seola-CHOE"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 최설 </b></sub></a><br /></td>
-    </tr>
-  </tbody>
-</table>
+# 🛠️Team
+| Name | GitHub |
+|------|--------|
+| 박주희 | [GitHub Profile](https://github.com/eggzuxi) |
+| 차민주 | [GitHub Profile](https://github.com/backgoon0903) |
+| 박신영 | [GitHub Profile](https://github.com/ssinyong) |
+| 진성오 | [GitHub Profile](https://github.com/jin-sung-oh) |
+| 최설아 | [GitHub Profile](https://github.com/Seola-CHOE) |
