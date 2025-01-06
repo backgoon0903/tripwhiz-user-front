@@ -30,12 +30,23 @@
     <br>
 </div>
 
-# Requirements
-For building and running the application you need:
-- [Node.js 20.11.0](https://nodejs.org/)
-- [Npm 10.7.0](https://www.npmjs.com/)
-
-# Installation
-```bash
-$ git clone https://github.com/eggzuxi/tripwhiz-user-front.git
-$ cd tripwhiz-user-front
+# Team
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/eggzuxi"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 박주희 </b></sub></a><br /></td>
+    </tr>
+    <tr>
+    <td align="center"><a href="https://github.com/backgoon0903"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 차민주 </b></sub></a><br /></td>
+    </tr>
+    <tr>
+    <td align="center"><a href="https://github.com/ssinyong"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 박신영 </b></sub></a><br /></td>
+    </tr>
+    <tr>
+    <td align="center"><a href="https://github.com/jin-sung-oh"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 진성오 </b></sub></a><br /></td>
+    </tr>
+    <tr>
+    <td align="center"><a href="https://github.com/Seola-CHOE"><img src="이미지주소" width="100px;" alt=""/><br /><sub><b> 최설 </b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
