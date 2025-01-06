@@ -29,3 +29,13 @@
     <img src="https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white>
     <br>
 </div>
+
+# Requirements
+For building and running the application you need:
+- [Node.js 20.11.0](https://nodejs.org/)
+- [Npm 10.7.0](https://www.npmjs.com/)
+
+# Installation
+```bash
+$ git clone https://github.com/eggzuxi/tripwhiz-user-front.git
+$ cd tripwhiz-user-front
